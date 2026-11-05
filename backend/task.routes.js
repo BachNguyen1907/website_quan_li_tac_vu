@@ -79,7 +79,17 @@ router.put('/:id', async (req, res) => {
                  due_date = COALESCE(?, due_date),
                  assignee_id = COALESCE(?, assignee_id)
              WHERE id = ? AND (creator_id = ? OR assignee_id = ?)`,
-            [title, description, status, priority, due_date, assignee_id, taskId, userId, userId]
+            [
+                title !== undefined ? title : null,
+                description !== undefined ? description : null,
+                status !== undefined ? status : null,
+                priority !== undefined ? priority : null,
+                due_date !== undefined ? due_date : null,
+                assignee_id !== undefined ? assignee_id : null,
+                taskId,
+                userId,
+                userId
+            ]
         );
 
         if (result.affectedRows === 0) {
