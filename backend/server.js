@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const authRoutes = require('./auth.routes');
+const taskRoutes = require('./task.routes');
 const authenticateToken = require('./auth.middleware');
 
 const app = express();
@@ -14,6 +16,7 @@ app.use(express.json());
 
 // Nạp module xác thực (Đăng ký / Đăng nhập)
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Route kiểm tra kết nối server
 app.get('/', (req, res) => {
