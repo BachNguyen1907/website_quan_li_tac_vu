@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         const userId = req.user.id;
         const { project_id } = req.query;
 
-        let query = 'SELECT * FROM tasks WHERE creator_id = ? OR assignee_id = ?';
+        let query = 'SELECT * FROM tasks WHERE (creator_id = ? OR assignee_id = ?)';
         let params = [userId, userId];
 
         if (project_id) {
